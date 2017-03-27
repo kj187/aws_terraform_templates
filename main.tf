@@ -33,7 +33,7 @@ resource "aws_lambda_permission" "lambda_nodejs_example_permissions" {
 resource "aws_lambda_function" "lambda_nodejs_example" {
   filename         = "lambda/nodejs/example-nodejs-lambda/example-nodejs-lambda.zip"
   description      = "Example NodeJS Lambda"
-  function_name    = "example_nodejs_lambda_11"
+  function_name    = "example_nodejs_lambda"
   role             = "${aws_iam_role.lambda_nodejs_example_iam_role.arn}"
   handler          = "example-nodejs-lambda.handler"
   runtime          = "nodejs6.10"
