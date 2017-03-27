@@ -11,6 +11,10 @@
     "lambda-local": "0.0.9"
   },
   "dependencies": {
-
+    "async": "^2.0.0-rc.3",
+    "aws-sdk": "^2.3.7",
+    "gm": "^1.23.0",
+    "path": "^0.12.7",
+    "util": "^0.10.3"
   }
 }

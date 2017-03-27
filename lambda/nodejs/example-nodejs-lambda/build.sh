@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
 
 cd lambda/nodejs/example-nodejs-lambda/
-
-echo "> Execute NPM install"
 npm install --production
-echo "> Finish NPM install"
-
-echo "> Execute packaging"
 chmod 777 .
-zip -r example-nodejs-lambda.zip *.js *.json
-echo "> Finish packaging"
+zip -r example-nodejs-lambda.zip *.js *.json node_modules
 
 echo
 echo "Now execute:"

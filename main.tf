@@ -16,13 +16,36 @@ resource "aws_s3_bucket" "lambda_nodejs_example_bucket" {
   acl           = "private"
   force_destroy = true
 }
+resource "aws_s3_bucket" "lambda_nodejs_example_bucketresized" {
+  bucket        = "lambda-nodejs-example-bucketresized"
+  acl           = "private"
+  force_destroy = true
+}
+
+resource "aws_lambda_permission" "lambda_nodejs_example_permissions" {
+  statement_id  = "AllowExecutionFromS3Bucket"
+  action        = "lambda:InvokeFunction"
+  function_name = "${aws_lambda_function.lambda_nodejs_example.arn}"
+  principal     = "s3.amazonaws.com"
+  source_arn    = "${aws_s3_bucket.lambda_nodejs_example_bucket.arn}"
+}
 
 resource "aws_lambda_function" "lambda_nodejs_example" {
   filename         = "lambda/nodejs/example-nodejs-lambda/example-nodejs-lambda.zip"
   description      = "Example NodeJS Lambda"
-  function_name    = "example_nodejs_lambda"
+  function_name    = "example_nodejs_lambda_11"
   role             = "${aws_iam_role.lambda_nodejs_example_iam_role.arn}"
   handler          = "example-nodejs-lambda.handler"
-  runtime          = "nodejs4.3"
+  runtime          = "nodejs6.10"
   source_code_hash = "${base64sha256(file("lambda/nodejs/example-nodejs-lambda/example-nodejs-lambda.zip"))}"
+  timeout          = "60"
+}
+
+resource "aws_s3_bucket_notification" "lambda_nodejs_example_bucket_notification" {
+  bucket = "${aws_s3_bucket.lambda_nodejs_example_bucket.id}"
+
+  lambda_function {
+    lambda_function_arn = "${aws_lambda_function.lambda_nodejs_example.arn}"
+    events              = ["s3:ObjectCreated:*"]
+  }
 }

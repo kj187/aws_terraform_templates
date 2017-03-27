@@ -3,18 +3,23 @@
 ## Setup
 
 ```
-$ export AWS_ACCESS_KEY_ID="anaccesskey"
-$ export AWS_SECRET_ACCESS_KEY="asecretkey"
+$ export AWS_ACCESS_KEY_ID="_your_access_key_id_"
+$ export AWS_SECRET_ACCESS_KEY="_your_secret_access_key_id_"
 $ export AWS_DEFAULT_REGION="eu-west-1"
 
 ```
 
-Build nodejs example lambda
+##  Build nodejs lambda example
 ```
 $ ./lambda/nodejs/example-nodejs-lambda/build.sh
 ```
 
-Plan or apply
+## Apply
 ```
-$ terraform plan
+$ terraform apply
+```
+
+## Destroy
+```
+$ terraform destroy
 ```
